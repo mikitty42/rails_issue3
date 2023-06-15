@@ -1,0 +1,9 @@
+<h2>以下の内容で送信します</h2>
+<%= form_with(model: @picture,local: true,url: choose_new_or_edit) do |form| %>
+    <%= form.hidden_field :image %>
+    <%= form.hidden_field :content %>
+    
+    <p>Picture:<%= @picture.image %></p>
+    <p>Content:<%= @picture.content %></p>
+    <%= form.submit '登録する' %>
+<% end %>

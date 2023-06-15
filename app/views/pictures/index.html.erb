@@ -1,2 +1,21 @@
-<h1>Pictures#index</h1>
-<p>Find me in app/views/pictures/index.html.erb</p>
+<h2>Picture投稿一覧</h2>
+<table>
+    <tr>
+        <th>Picture</th>
+        <th>内容</th>
+        <th>投稿者</th>
+    </tr>
+    <tr>
+    <% @pictures.each do |picture| %>
+    
+    <td><%= image_tag picture.image %></td>
+    <td><%= picture.content %></td>
+    <td><%= picture.user.name %></td>
+    <td><%= link_to 'picture詳細を確認する',picture_path(picture.id) %></td>
+    <td><%= link_to 'pictureを編集する',edit_picture_path(picture.id) %></td>
+    <td><%= link_to 'pictureを削除する',picture_path(picture.id),method: :delete %></td>
+    
+    <% end %>
+    </tr>
+</table>
+<%= link_to 'pictureを投稿する',new_picture_path %>
