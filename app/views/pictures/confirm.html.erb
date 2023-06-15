@@ -2,8 +2,13 @@
 <%= form_with(model: @picture,local: true,url: pictures_path) do |form| %>
     <%= form.hidden_field :image %>
     <%= form.hidden_field :content %>
-    
-    <p>Picture:<%= @picture.image %></p>
+    <%= image_tag(@picture.image.url) if @picture.image && @picture.image.url %>
     <p>Content:<%= @picture.content %></p>
     <%= form.submit '登録する' %>
+<% end %>
+ <%= form_with(model: @picture,url:new_picture_path,local:true,method: 'get')
+    <%= form.hidden_field :image_cache %>
+    <%= form.submit '戻る',name: 'back' %>
+    <p>Content:<%= @picture.content %></p>
+    
 <% end %>

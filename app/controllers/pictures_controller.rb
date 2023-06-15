@@ -4,7 +4,11 @@ class PicturesController < ApplicationController
   end
 
   def new
-      @picture = Picture.new
+      if prams[:back]
+          @picture = Picture.new(picture_params)
+      else
+          @picture = Picture.new
+      end
   end
   
   def create
