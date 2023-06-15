@@ -14,6 +14,7 @@ class PicturesController < ApplicationController
   def create
       @picture = Picture.new(picture_params)
       if @picture.save
+          PictureMailer.picture_mail(@picture).deliver
           redirect_to pictures_path,notice: 'pictureの投稿に成功しました'
       else
           render :new
