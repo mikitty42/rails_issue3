@@ -1,0 +1,13 @@
+<h2>Pictureお気に入り一覧画面</h2>
+<table>
+    <tr>
+        <th></th>
+    </tr>
+    <tr>
+        <% @favorites.each do |favorite| %>
+    <tr>
+        <td><%= image_tag favorite.picture.image.url %></td>
+        <td><%= favorite.picture.content %>
+        <% end %>
+    </tr>
+</table>
