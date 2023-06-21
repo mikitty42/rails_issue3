@@ -11,7 +11,7 @@ gem 'puma', '~> 5.0'
 
 gem 'sass-rails', '>= 6'
 
-gem 'webpacker', '~> 5.0'
+gem 'webpacker', '5.4.3'
 
 gem 'turbolinks', '~> 5'
 

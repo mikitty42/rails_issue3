@@ -5,17 +5,18 @@
         <th>内容</th>
         <th>投稿者</th>
     </tr>
-    <tr>
     <% @pictures.each do |picture| %>
+    <tr>
     
-    <td><%= image_tag picture.image %></td>
-    <td><%= picture.content %></td>
-    <td><%= picture.user.name %></td>
-    <td><%= link_to 'picture詳細を確認する',picture_path(picture.id) %></td>
-    <td><%= link_to 'pictureを編集する',edit_picture_path(picture.id) %></td>
-    <td><%= link_to 'pictureを削除する',picture_path(picture.id),method: :delete %></td>
     
-    <% end %>
+        <td><%= image_tag(picture.image.url,size:"80x80") if picture.image && picture.image.url %></td>
+        <td><%= picture.content %></td>
+        <td><%= picture.user.name %></td>
+        <td><%= link_to 'picture詳細を確認する',picture_path(picture.id) %></td>
+        <td><%= link_to 'pictureを編集する',edit_picture_path(picture.id) %></td>
+        <td><%= link_to 'pictureを削除する',picture_path(picture.id),method: :delete %></td>
     </tr>
+    <% end %>
+
 </table>
 <%= link_to 'pictureを投稿する',new_picture_path %>

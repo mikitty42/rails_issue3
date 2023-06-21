@@ -4,7 +4,7 @@ class PicturesController < ApplicationController
   end
 
   def new
-      if prams[:back]
+      if params[:back]
           @picture = Picture.new(picture_params)
       else
           @picture = Picture.new
@@ -12,7 +12,7 @@ class PicturesController < ApplicationController
   end
   
   def create
-      @picture = Picture.new(picture_params)
+      @picture = current_user.pictures.build(picture_params)
       if @picture.save
           PictureMailer.picture_mail(@picture).deliver
           redirect_to pictures_path,notice: 'pictureの投稿に成功しました'
@@ -23,6 +23,7 @@ class PicturesController < ApplicationController
 
   def show
       @picture = Picture.find(params[:id])
+      @favorite = current_user.favorites.find_by(picture_id: @picture.id)
   end
 
   def edit
@@ -45,7 +46,7 @@ class PicturesController < ApplicationController
   end
   
   def confirm
-      @picture = Picture.new(picture_params)
+      @picture = current_user.pictures.build(picture_params)
       render :new if @picture.invalid?
   end
   
@@ -53,6 +54,6 @@ class PicturesController < ApplicationController
   private
   
   def picture_params
-      params.require(:picture).permit(:image,:image_cache,:content)
+      params.require(:picture).permit(:image,:image_cache,:content,:email)
   end
 end

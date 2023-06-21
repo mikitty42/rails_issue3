@@ -14,13 +14,19 @@
   <% flash.each do |key,value| %>
     <%= content_tag(:div,value,class: "#{key}") %>
   <% end %>
-  <% if logged_in? %>
-    <%= link_to 'Profile',user_path(current_user.id) %>
-    <%= link_to 'Logout',session_path(current_user.id),method: :delete %>
+   <% if logged_in? %>
+    <header>
+    <button type="button" class="btn btn-default navbar-btn"><%= link_to 'Profile',user_path(current_user.id) %></button>
+    <button type="button" class="btn btn-default navbar-btn"><%= link_to 'Logout',session_path(current_user.id),method: :delete %></button>
   <% else %>
-    <%= link_to 'Sign up',new_user_path %>
-    <%= link_to 'Login',new_session_path %>
+        <button type="button" class="btn btn-default navbar-btn"><%= link_to 'Login',new_session_path %></button>
+        <button type="button" class="btn btn-default navbar-btn"><%= link_to 'Sign up',new_user_path %></button>
+    </header>
   <% end %>
     <%= yield %>
+    <footer>
+      <p>運営会社 aaa株式会社</p>
+      <p>© 2015-2016 aaa Corp.</p>
+    </footer>
   </body>
 </html>
