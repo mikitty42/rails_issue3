@@ -1,4 +1,6 @@
 class PicturesController < ApplicationController
+    before_action :set_picture,only: [:edit,:update]
+
   def index
       @pictures = Picture.all
   end
@@ -27,11 +29,13 @@ class PicturesController < ApplicationController
   end
 
   def edit
-      @picture = Picture.find(params[:id])
+      if current_user.id != @picture.user_id
+          flash[:danger] = '権限がありません'
+          redirect_to pictures_path
+      end
   end
   
   def update
-      @picture = Picture.find(params[:id])
       if @picture.update(picture_params)
           redirect_to pictures_path,notice: 'pictureを編集しました'
       else
@@ -56,4 +60,10 @@ class PicturesController < ApplicationController
   def picture_params
       params.require(:picture).permit(:image,:image_cache,:content,:email)
   end
+  
+  def set_picture
+      @picture = Picture.find(params[:id])
+  end
+  
+
 end

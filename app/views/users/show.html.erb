@@ -2,5 +2,8 @@
 <p>Profile画像:<%= image_tag(@user.image.url,size:"80x80") if @user.image && @user.image.url %>
 <p>メーアドレス:<%= @user.email %></p>
 
-<%= link_to 'Profileを編集する',edit_user_path(@user.id) %>
+
+      <% if current_user.id == @user.id %>
+          <%= link_to 'Profileを編集する',edit_user_path(@user.id) %>
+      <% end %>
 
